@@ -12,11 +12,11 @@
 namespace krafter {
 
 	String::String() {
-		// TODO Auto-generated constructor stub
-
+		init();
 	}
 
 	String::String(const String &string) {
+		init();
 		this->set(string);
 		if (string.flags & String::FLAG_CONCAT) {
 			delete &string;
@@ -24,11 +24,12 @@ namespace krafter {
 	}
 
 	String::String(const char *chars) {
+		init();
 		this->set(chars);
 	}
 
 	String::~String() {
-		// TODO Auto-generated destructor stub
+
 	}
 
 	String& String::append(const char *chars) {
@@ -51,11 +52,16 @@ namespace krafter {
 		return *this;
 	}
 
+	void String::init() {
+		this->flags = 0;
+	}
+
 	unsigned int String::length() const {
 		return _data.str().length();
 	}
 
 	String& String::reset() {
+		this->init();
 		_data.str("");
 		_data.clear();
 		return *this;
@@ -138,6 +144,12 @@ namespace krafter {
 
 	const char* String::toChars() const {
 		return _data.str().c_str();
+	}
+
+	String& String::operator= (const char *rhs) {
+		this->reset();
+		this->set(rhs);
+		return *this;
 	}
 
 	String& String::operator= (const String &rhs) {

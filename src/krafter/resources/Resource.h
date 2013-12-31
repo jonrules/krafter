@@ -8,6 +8,8 @@
 #ifndef RESOURCE_H_
 #define RESOURCE_H_
 
+#include <krafter/String.h>
+
 namespace krafter {
 	namespace resources {
 
@@ -15,6 +17,18 @@ namespace krafter {
 			public:
 				Resource();
 				virtual ~Resource();
+				void addResource(Resource &resource);
+				String getHeader(const char *name);
+				String getHeader(String name);
+				String getPayload();
+				void print();
+				void setHeader(const char *header);
+				void setHeader(const String header);
+				void setPayload(const char *payload);
+				void setPayload(const String header);
+				String toString();
+			private:
+				String _payload;
 		};
 
 	} /* namespace resources */

@@ -18,20 +18,20 @@ namespace krafter {
 		}
 
 		XmlResourceParser::~XmlResourceParser() {
-			delete(_doc);
+			delete _doc;
 			_doc = NULL;
 		}
 
 		String XmlResourceParser::generateSource() {
-			if (_doc == NULL || _doc->Error()) {
-//				return "";
-			}
-
 			String source;
+			if (_doc == NULL || _doc->Error()) {
+				return source;
+			}
 
 			TiXmlElement *rootElement = _doc->RootElement();
 			std::map<String, char> includes;
 			int serial = 0;
+
 			String body = this->generateSource(rootElement, includes, serial);
 
 			std::map<String, char>::iterator iter;
@@ -40,9 +40,13 @@ namespace krafter {
 				name.replace(".", "/");
 				source << "#include <" << name << ".h>\n";
 			}
+			source << "int main(int argc, const char *argv[]) {\n";
+			source << body << "\n";
+			if (body.length() > 0) {
+				source << "object0.print();\n";
+			}
+			source << "}";
 
-			source << body;
-			source << "\n";
 			return source;
 		}
 
@@ -50,7 +54,8 @@ namespace krafter {
 				std::map<String, char> &includes, int &serial) {
 			String body;
 			String className(parentElement->Value());
-			String objectName = "object" + serial;
+			String objectName = "object";
+			objectName << serial;
 
 			includes[className]++;
 			String type = className;
