@@ -21,6 +21,7 @@ namespace krafter {
 				virtual ~XmlResourceParser();
 				String generateSource();
 				void parseFile(const char *filename);
+				void parseFile(const String &filename);
 			private:
 				TiXmlDocument *_doc;
 				String generateSource(TiXmlElement *parentElement,

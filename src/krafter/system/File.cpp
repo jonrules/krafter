@@ -1,23 +1,23 @@
 /*
- * IniConfig.cpp
+ * File.cpp
  *
- *  Created on: Dec 25, 2013
+ *  Created on: Jan 16, 2014
  *      Author: Jonathan Baltazar
  */
 
-#include <krafter/config/IniConfig.h>
+#include <krafter/system/File.h>
 
 namespace krafter {
-	namespace config {
+	namespace system {
 
-		IniConfig::IniConfig() {
+		File::File() {
 			// TODO Auto-generated constructor stub
 
 		}
 
-		IniConfig::~IniConfig() {
+		File::~File() {
 			// TODO Auto-generated destructor stub
 		}
 
-	} /* namespace config */
+	} /* namespace system */
 } /* namespace krafter */

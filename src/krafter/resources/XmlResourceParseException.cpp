@@ -5,7 +5,7 @@
  *      Author: Jonathan Baltazar
  */
 
-#include "XmlResourceParseException.h"
+#include <krafter/resources/XmlResourceParseException.h>
 
 namespace krafter {
 	namespace config {

@@ -5,7 +5,7 @@
  *      Author: Jonathan Baltazar
  */
 
-#include "Config.h"
+#include <krafter/config/Config.h>
 
 namespace krafter {
 	namespace config {

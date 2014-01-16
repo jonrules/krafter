@@ -5,7 +5,7 @@
  *      Author: Jonathan Baltazar
  */
 
-#include "String.h"
+#include <krafter/String.h>
 #include <cstring>
 #include <string>
 
@@ -29,7 +29,10 @@ namespace krafter {
 	}
 
 	String::~String() {
-
+		if (_chars != NULL) {
+			delete[] _chars;
+			_chars = NULL;
+		}
 	}
 
 	String& String::append(const char *chars) {
@@ -54,6 +57,7 @@ namespace krafter {
 
 	void String::init() {
 		this->flags = 0;
+		_chars = NULL;
 	}
 
 	unsigned int String::length() const {
@@ -61,9 +65,13 @@ namespace krafter {
 	}
 
 	String& String::reset() {
-		this->init();
-		_data.str("");
+		this->flags = 0;
+		_data.str(_empty);
 		_data.clear();
+		if (_chars != NULL) {
+			delete[] _chars;
+			_chars = NULL;
+		}
 		return *this;
 	}
 
@@ -143,11 +151,17 @@ namespace krafter {
 	}
 
 	const char* String::toChars() const {
-		return _data.str().c_str();
+		if (_chars != NULL) {
+			delete[] _chars;
+		}
+		unsigned int length = _data.str().length();
+		_chars = new char[length + 1];
+		memcpy(_chars, _data.str().c_str(), length);
+		_chars[length] = '\0';
+		return _chars;
 	}
 
 	String& String::operator= (const char *rhs) {
-		this->reset();
 		this->set(rhs);
 		return *this;
 	}
@@ -156,7 +170,6 @@ namespace krafter {
 		if (this == &rhs) {
 			return *this;
 		}
-		this->reset();
 		this->set(rhs);
 		return *this;
 	}

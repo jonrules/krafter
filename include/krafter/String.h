@@ -52,6 +52,8 @@ namespace krafter {
 			bool operator< (const String &rhs) const;
 		private:
 			std::stringstream _data;
+			std::string _empty;
+			mutable char *_chars;
 			void init();
 	};
 

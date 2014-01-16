@@ -5,7 +5,7 @@
  *      Author: Jonathan Baltazar
  */
 
-#include "XmlResourceParser.h"
+#include <krafter/resources/XmlResourceParser.h>
 #include <krafter/String.h>
 #include <map>
 #include <tinyxml/tinyxml.h>
@@ -25,7 +25,7 @@ namespace krafter {
 		String XmlResourceParser::generateSource() {
 			String source;
 			if (_doc == NULL || _doc->Error()) {
-				return source;
+				return String(_doc->ErrorDesc());
 			}
 
 			TiXmlElement *rootElement = _doc->RootElement();
@@ -108,6 +108,10 @@ namespace krafter {
 			if (!loaded) {
 				// Throw exception
 			}
+		}
+
+		void XmlResourceParser::parseFile(const String &filename) {
+			this->parseFile(filename.toChars());
 		}
 
 	} /* namespace resources */
