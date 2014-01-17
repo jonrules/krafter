@@ -5,10 +5,10 @@
  *      Author: Jonathan Baltazar
  */
 
-#include <krafter/system/FileFolder.h>
+#include <krafter/server/FileFolder.h>
 
 namespace krafter {
-	namespace system {
+	namespace server {
 
 		FileFolder::FileFolder() {
 			// TODO Auto-generated constructor stub

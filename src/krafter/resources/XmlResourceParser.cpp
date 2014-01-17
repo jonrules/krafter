@@ -25,7 +25,7 @@ namespace krafter {
 		String XmlResourceParser::generateSource() {
 			String source;
 			if (_doc == NULL || _doc->Error()) {
-				return String(_doc->ErrorDesc());
+				return source;
 			}
 
 			TiXmlElement *rootElement = _doc->RootElement();

@@ -9,7 +9,7 @@
 #define FILEFOLDER_H_
 
 namespace krafter {
-	namespace system {
+	namespace server {
 
 		class FileFolder {
 			public:
