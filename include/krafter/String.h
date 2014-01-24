@@ -23,7 +23,9 @@ namespace krafter {
 			String& append(const char *chars);
 			String& append(char c);
 			String& append(int integer);
+			String& append(unsigned int integer);
 			String& append(const String &string);
+			unsigned int find(const String &string) const;
 			unsigned int length() const;
 			String& replace(const char *find, const char *replace);
 			String& replace(String &find, String &replace);
@@ -34,6 +36,7 @@ namespace krafter {
 			String& set(char c);
 			String& set(int integer);
 			String& set(const String &string);
+			String serialize();
 			const char* toChars() const;
 			String& operator= (const char *rhs);
 			String& operator= (const String &rhs);
@@ -44,10 +47,12 @@ namespace krafter {
 			String& operator+= (const char *rhs);
 			String& operator+= (char rhs);
 			String& operator+= (int rhs);
+			String& operator+= (unsigned int rhs);
 			String& operator+= (const String &rhs);
 			String& operator<< (const char *rhs);
 			String& operator<< (char rhs);
 			String& operator<< (int rhs);
+			String& operator<< (unsigned int rhs);
 			String& operator<< (const String &rhs);
 			bool operator< (const String &rhs) const;
 		private:

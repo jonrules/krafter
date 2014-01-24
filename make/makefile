@@ -3,14 +3,14 @@ VENDOR_LIB_FILES := $(shell find ../vendor/ -type f -name '*.cpp')
 OBJ_LIB_FILES := $(shell find . -maxdepth 1 -type f -name '*.o' -not -name 'main.o')
 #OBJ_LIB_FILES := $(wildcard *.o)
 
-all: objects
+all: obj
 
-objects:
+obj:
 	@echo "Compiling objects"
 	g++ -c -Wall -fpic -I../include -I../vendor $(SRC_LIB_FILES) $(VENDOR_LIB_FILES)
-	@echo "Run 'make executables'"
+	@echo "Run 'make exec'"
 	
-executables:
+exec:
 	@echo "Compiling ../bin/libkrafter.so"
 	g++ -shared -o ../bin/libkrafter.so $(OBJ_LIB_FILES)
 	@echo "Compiling ../bin/krafter"

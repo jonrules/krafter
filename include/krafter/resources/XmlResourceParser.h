@@ -25,7 +25,7 @@ namespace krafter {
 			private:
 				TiXmlDocument *_doc;
 				String generateSource(TiXmlElement *parentElement,
-						std::map<String, char> &includes, int &serial);
+						std::map<String, char> &includes, unsigned int &serial);
 		};
 
 	} /* namespace resources */

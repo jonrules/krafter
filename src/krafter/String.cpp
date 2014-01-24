@@ -50,9 +50,18 @@ namespace krafter {
 		return *this;
 	}
 
+	String& String::append(unsigned int integer) {
+		_data << integer;
+		return *this;
+	}
+
 	String& String::append(const String &string) {
 		this->append(string.toChars());
 		return *this;
+	}
+
+	unsigned int String::find(const String &string) const {
+		return _data.str().find(string.toChars());
 	}
 
 	void String::init() {
@@ -96,6 +105,13 @@ namespace krafter {
 	String& String::set(const String &string) {
 		this->set(string.toChars());
 		return *this;
+	}
+
+	String String::serialize() {
+		String serialized = *this;
+		serialized.replace("\\", "\\\\").replace("\"", "\\\"");
+		serialized = String("\"") << serialized << "\"";
+		return serialized;
 	}
 
 	String& String::replace(const char *find, const char *replace) {
@@ -237,6 +253,11 @@ namespace krafter {
 		return *this;
 	}
 
+	String& String::operator+= (unsigned int rhs) {
+		this->append(rhs);
+		return *this;
+	}
+
 	String& String::operator+= (const String &rhs) {
 		this->append(rhs);
 		return *this;
@@ -251,6 +272,10 @@ namespace krafter {
 	}
 
 	String& String::operator<< (int rhs) {
+		return (*this += rhs);
+	}
+
+	String& String::operator<< (unsigned int rhs) {
 		return (*this += rhs);
 	}
 

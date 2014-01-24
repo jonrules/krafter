@@ -25,12 +25,8 @@ namespace krafter {
 
 		}
 
-		String Resource::getHeader(const char *name) {
-			return "";
-		}
-
-		String Resource::getHeader(String name) {
-			return "";
+		String Resource::getHeader(const String &name) {
+			return _headers[name];
 		}
 
 		String Resource::getPayload() {
@@ -42,24 +38,28 @@ namespace krafter {
 			std::cout << string.toChars();
 		}
 
-		void Resource::setHeader(const char *header) {
-
+		void Resource::setHeader(const String &name, const String &value) {
+			_headers[name] = value;
 		}
 
-		void Resource::setHeader(const String header) {
-
-		}
-
-		void Resource::setPayload(const char *payload) {
+		void Resource::setPayload(const String &payload) {
 			_payload.set(payload);
 		}
 
-		void Resource::setPayload(const String payload) {
-			this->setPayload(payload.toChars());
-		}
-
 		String Resource::toString() {
-			return _payload;
+			String string;
+
+			// Headers
+			std::map<String, String>::iterator headerIter;
+			for (headerIter = _headers.begin(); headerIter != _headers.end(); ++headerIter) {
+				string << headerIter->first << ": " << headerIter->second << "\r\n";
+			}
+			string << "\r\n";
+
+			// Payload
+			string << _payload;
+
+			return string;
 		}
 
 	} /* namespace resources */
