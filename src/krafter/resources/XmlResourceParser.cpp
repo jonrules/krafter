@@ -42,11 +42,10 @@ namespace krafter {
 				source << "#include <" << name << ".h>\n";
 			}
 			source << "int main(int argc, const char *argv[]) {\n";
-			source << body << "\n";
 			if (body.length() > 0) {
-				source << "object0.print();\n";
+				source << body << "object0.print();\n";
 			}
-			source << "}";
+			source << "}\n";
 
 			return source;
 		}

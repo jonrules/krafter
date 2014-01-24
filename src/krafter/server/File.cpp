@@ -9,6 +9,7 @@
 #include <krafter/String.h>
 #include <fstream>
 #include <string>
+#include <stdio.h>
 
 namespace krafter {
 	namespace server {
@@ -23,6 +24,31 @@ namespace krafter {
 
 		void File::close() {
 			_fileStream.close();
+		}
+
+		String File::execute(const String &filename) {
+			FILE *in;
+			char buffer[512];
+			unsigned int bufferSize = sizeof(buffer);
+			String output;
+
+			if (!(in = popen(filename.toChars(), "r"))) {
+				//@TODO throw exception
+				return output;
+			}
+
+			while (fgets(buffer, bufferSize, in) != NULL) {
+				output << buffer;
+			}
+
+			pclose(in);
+
+			return output;
+		}
+
+		bool File::exists(const String &filename) {
+			std::ifstream fstream(filename.toChars());
+			return fstream;
 		}
 
 		String File::getParentFolder(const String &filename) {

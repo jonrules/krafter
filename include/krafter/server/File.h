@@ -19,6 +19,8 @@ namespace krafter {
 				File();
 				virtual ~File();
 				void close();
+				static String execute(const String &filename);
+				static bool exists(const String &filename);
 				static String getParentFolder(const String &filename);
 				void open(const String &filename);
 				void open(const String &filename, std::ios::openmode mode);

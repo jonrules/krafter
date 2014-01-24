@@ -110,6 +110,7 @@ namespace krafter {
 	String String::serialize() {
 		String serialized = *this;
 		serialized.replace("\\", "\\\\").replace("\"", "\\\"");
+		serialized.replace("\r\n", "\\r\\n").replace("\n", "\\n");
 		serialized = String("\"") << serialized << "\"";
 		return serialized;
 	}

@@ -35,12 +35,10 @@ namespace krafter {
 		// Build output source filename
 		String outputSrcFilename;
 		outputSrcFilename << documentRoot << "/src/www" << requestUri << ".cpp";
-		std::cout << outputSrcFilename.toChars() << "\n";
 
 		// Build output binary filename
 		String outputBinFilename;
 		outputBinFilename << documentRoot << "/bin/www" << requestUri;
-		std::cout << outputBinFilename.toChars() << "\n";
 
 		// Parse resource
 		resources::XmlResourceParser parser;
@@ -54,7 +52,6 @@ namespace krafter {
 		String parentSrcFolder = server::File::getParentFolder(outputSrcFilename);
 		String mkCmd("mkdir -p ");
 		mkCmd << parentSrcFolder;
-		std::cout << mkCmd.toChars() << "\n";
 		system(mkCmd.toChars());
 		// Write source file
 		server::File outputSrcFile;
@@ -66,7 +63,6 @@ namespace krafter {
 		String parentBinFolder = server::File::getParentFolder(outputBinFilename);
 		mkCmd = "mkdir -p ";
 		mkCmd << parentBinFolder;
-		std::cout << mkCmd.toChars() << "\n";
 		system(mkCmd.toChars());
 		// Make binaries
 		String binCmd("g++ -Wall");
@@ -74,9 +70,12 @@ namespace krafter {
 		binCmd << " -I" << documentRoot << "/include";
 		binCmd << " -o " << outputBinFilename;
 		binCmd << " " << outputSrcFilename;
-		binCmd << " -lkrafter";
-		std::cout << binCmd.toChars() << "\n";
+		binCmd << " -lkrafter -lkrafter-site";
 		system(binCmd.toChars());
+		// Run compiled binary
+		if (server::File::exists(outputBinFilename)) {
+			std::cout << server::File::execute(outputBinFilename).toChars();
+		}
 	}
 
 } /* namespace krafter */
