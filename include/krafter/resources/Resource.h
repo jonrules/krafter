@@ -19,12 +19,13 @@ namespace krafter {
 				Resource();
 				virtual ~Resource();
 				void addResource(Resource &resource);
-				String getHeader(const String &name);
-				String getPayload();
-				void print();
-				void setHeader(const String &name, const String &value);
-				void setPayload(const String &payload);
-				String toString();
+				virtual String getHeader(const String &name);
+				virtual String getHeaders();
+				virtual String getPayload();
+				virtual void print();
+				virtual void setHeader(const String &name, const String &value);
+				virtual void setPayload(const String &payload);
+				virtual String toString();
 			private:
 				std::map<String, String> _headers;
 				String _payload;

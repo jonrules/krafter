@@ -29,6 +29,15 @@ namespace krafter {
 			return _headers[name];
 		}
 
+		String Resource::getHeaders() {
+			String headers;
+			std::map<String, String>::iterator headerIter;
+			for (headerIter = _headers.begin(); headerIter != _headers.end(); ++headerIter) {
+				headers << headerIter->first << ": " << headerIter->second << "\r\n";
+			}
+			return headers;
+		}
+
 		String Resource::getPayload() {
 			return _payload;
 		}
@@ -50,14 +59,10 @@ namespace krafter {
 			String string;
 
 			// Headers
-			std::map<String, String>::iterator headerIter;
-			for (headerIter = _headers.begin(); headerIter != _headers.end(); ++headerIter) {
-				string << headerIter->first << ": " << headerIter->second << "\r\n";
-			}
-			string << "\r\n";
+			string << this->getHeaders() << "\r\n";
 
 			// Payload
-			string << _payload;
+			string << this->getPayload();
 
 			return string;
 		}
